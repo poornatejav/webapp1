@@ -1,0 +1,13 @@
+variable "region" {}
+variable "project" {}
+variable "vpc_cidr" {}
+variable "public_cidr" {}
+variable "private_cidr" {}
+variable "ingressrules" {}
+variable "egressrules" {}
+variable "bucket_name" {}
+variable "object_key" {}
+variable "source_path" {}
+variable "key_name" {}
+variable "public_key" {}
+variable "instance_type" {}

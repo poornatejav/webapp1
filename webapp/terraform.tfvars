@@ -1,0 +1,13 @@
+region = "us-east-1"
+project = "web-app"
+vpc_cidr = "10.0.0.0/16"
+public_cidr = "10.0.1.0/24"
+private_cidr = "10.0.2.0/24"
+ingressrules =[22,80]
+egressrules = [0]
+bucket_name = "09051997-0355-1a"
+object_key = "index.html" 
+source_path = "/Users/poornateja/Documents/Cloud Training/aws-web-app/webapp/webpage/index.html"
+key_name = "web-app-key"
+public_key = "/Users/poornateja/.ssh/web-app-key.pub"
+instance_type = "t2.micro"
