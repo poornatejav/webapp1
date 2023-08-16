@@ -55,5 +55,5 @@ module "ec2_private" {
   security_group_id = module.security_group.security_group_id
   instance_profile = module.s3.iam_instance_profile
   key_name = module.key_pair.key_pair_name
-  user_data = file("../templates/public.tpl")
+  user_data = file("../templates/private.tpl")
 }

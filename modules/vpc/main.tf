@@ -93,3 +93,13 @@ resource "aws_route_table_association" "public_subnet_route_table_association" {
   route_table_id = aws_route_table.public_route_table[count.index].id
 }
 
+resource "aws_subnet" "private_subnet" {
+  count      = length(var.private_cidr)
+  vpc_id     = aws_vpc.vpc.id
+  cidr_block = var.private_cidr[count.index]
+  availability_zone = data.aws_availability_zones.available_zones.names[count.index]
+
+  tags = {
+    Name = "private_subnet_${count.index}"
+  }
+}
