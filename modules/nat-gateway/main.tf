@@ -1,5 +1,5 @@
 resource "aws_eip" "eip_for_nat_gateway" {
-  count     = length(var.public_subnet_ids)
+  count     = length(var.public_subnet_id)
   domain    = "vpc"
 
   tags = {
@@ -8,9 +8,9 @@ resource "aws_eip" "eip_for_nat_gateway" {
 }
 
 resource "aws_nat_gateway" "nat_gateway" {
-  count          = length(var.public_subnet_ids)
+  count          = length(var.public_subnet_id)
   allocation_id = aws_eip.eip_for_nat_gateway[count.index].id
-  subnet_id     = var.public_subnet_ids[count.index]
+  subnet_id     = var.public_subnet_id[count.index]
 
   tags = {
     Name = "Nat Gateway ${count.index + 1}"
@@ -20,7 +20,7 @@ resource "aws_nat_gateway" "nat_gateway" {
 }
 
 resource "aws_route_table" "private_route_table" {
-  count     = length(var.private_subnet_ids)
+  count     = length(var.private_subnet_id)
   vpc_id    = var.vpc_id
 
   route {
@@ -34,7 +34,7 @@ resource "aws_route_table" "private_route_table" {
 }
 
 resource "aws_route_table_association" "private_subnet_route_table_association" {
-  count         = length(var.private_subnet_ids)
-  subnet_id     = var.private_subnet_ids[count.index]
+  count         = length(var.private_subnet_id)
+  subnet_id     = var.private_subnet_id[count.index]
   route_table_id = aws_route_table.private_route_table[count.index].id
 }
