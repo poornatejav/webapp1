@@ -21,7 +21,16 @@ cluster_addons = {
     most_recent = true
   }
 }
+eks_cluster_policy_attachment = [
+  # "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
+  # "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
+]
 
+eks_node_policy_attachment = [
+  # "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+  # "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+  # "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+]
 
 self_managed_node_group_defaults = {
   instance_type                          = "t2.micro"
@@ -102,13 +111,13 @@ self_managed_node_groups = {
 manage_aws_auth_configmap = true
 
 
-aws_auth_roles = [
-    {
-      rolearn  = module.iam.eks_cluster_role_arn
-      username = "terraform"
-      groups   = ["system:masters"] #admin group
-    },
-  ]
+# aws_auth_roles = [
+#     {
+#       rolearn  = module.iam.eks_cluster_role_arn
+#       username = "terraform"
+#       groups   = ["system:masters"] #admin group
+#     },
+#   ]
 
 aws_auth_users = []
 

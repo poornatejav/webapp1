@@ -1,3 +1,8 @@
+variable "region" {
+}
+
+variable "project" {
+}
 variable "cluster_name" {
 }
 
@@ -30,6 +35,9 @@ variable "ingressrules" {
 
 variable "egressrules" {
 }
+
+variable "eks_cluster_policy_attachment" {}
+variable "eks_node_policy_attachment" {}
 
 variable "self_managed_node_group_defaults" {
   type        = object({
@@ -99,13 +107,13 @@ variable "manage_aws_auth_configmap" {
   type        = bool
 }
 
-variable "aws_auth_roles" {
-  type        = list(object({
-    rolearn  = string
-    username = string
-    groups   = list(string)
-  }))
-}
+# variable "aws_auth_roles" {
+#   type        = list(object({
+#     rolearn  = string
+#     username = string
+#     groups   = list(string)
+#   }))
+# }
 
 variable "aws_auth_users" {
   type        = list(object({

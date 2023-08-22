@@ -14,6 +14,12 @@ module "security_group" {
   egressrules  = var.egressrules
 }
 
+module "iam" {
+  source                        = "../modules/iam"
+  eks_cluster_policy_attachment = var.eks_cluster_policy_attachment
+  eks_node_policy_attachment    = var.eks_node_policy_attachment
+}
+
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 19.0"
@@ -41,7 +47,14 @@ module "eks" {
 
   manage_aws_auth_configmap = var.manage_aws_auth_configmap
 
-  aws_auth_roles     = var.aws_auth_roles
+  aws_auth_roles = [
+    {
+      userarn  = module.iam.eks_cluster_role_arn
+      username = "terraform"
+      groups   = ["system:masters"]
+    },
+  ]
+
   aws_auth_users     = var.aws_auth_users
   aws_auth_accounts  = var.aws_auth_accounts
 
