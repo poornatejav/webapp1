@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-rs
+  labels:
+    env: test
+spec:
+  template:
+    
+    metadata:
+      name: nginx1
+      labels:
+        env: test
+    spec:
+      containers:
+        - name: nginx1_container
+          image: nginx
+  
+  replicas: 2
+  selector:
+    matchLabels:
+      env: test
+
